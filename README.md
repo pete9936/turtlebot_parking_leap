@@ -13,8 +13,10 @@ We changed the record time of the gestures to 2.0 seconds (currently 3.5 in pack
 
 To test the leap_motion first make sure the LeapMotion is running (sudo leapd) or (sudo service leapd restart) and to visulaize the LeapMotion in a new terminal type "LeapControlPanel" then bring up the Visualizer. Start roscore then run leap_turtle.launch
 
-The vision packages for Astra used on this project can be found below:
+# Setting up the Turtlebot Laptop
 
+The vision packages for Astra used on this project can be found below:
+Using OpenCV 3.3.1
 
 
 
