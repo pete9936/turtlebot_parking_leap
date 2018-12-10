@@ -83,10 +83,12 @@ class GoForward():
                 if a == 5:
 		if gesturedata == 'Swipe':   # SKIP GESTURE
             		stage = 1
+			print("Swipe: Skipping Spot")
         		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         		self.cmd_vel.publish(move_cmd)
 		elif gesturedata == 'Gandalf':   # Go into manual mode
 			stage = 3
+			print("Gandalf: Going into manual mode")
         		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         		self.cmd_vel.publish(move_cmd)
 		else:
@@ -95,6 +97,7 @@ class GoForward():
 	if stage == 3:
  		if char=="a" or char=="A":
             		stage = 1
+			print("Switching to Autonomous mode")
         		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         		self.cmd_vel.publish(move_cmd)
 		else:
