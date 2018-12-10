@@ -37,7 +37,7 @@ class GoForward():
             move_cmd.linear.x = -0.1
 
         elif data.ypr.y >= 20.0 and data.ypr.y < 45.0:
-            move_cmd.linear.x = -data.ypr.y*0.01
+            move_cmd.linear.x = -0.3 # data.ypr.y*0.01
 
         elif data.ypr.y >= 45.0:
             move_cmd.linear.x = -0.5
@@ -46,7 +46,7 @@ class GoForward():
             move_cmd.linear.x = 0.1
 
         elif data.ypr.y <= -20.0 and data.ypr.y > -45.0:
-            move_cmd.linear.x = data.ypr.y*0.01
+            move_cmd.linear.x = 0.3 # data.ypr.y*0.01
 
         elif data.ypr.y <= -45.0:
             move_cmd.linear.x = 0.5
@@ -60,7 +60,11 @@ class GoForward():
 
         elif data.ypr.z >= 20.0 and data.ypr.z < 45.0:
             print("TURN RIGHT")
-            move_cmd.angular.z = data.ypr.z*0.01
+            move_cmd.angular.z = 0.35 # data.ypr.z*0.01
+
+        elif data.ypr.z >= 45.0:
+            print("TURN RIGHT")
+            move_cmd.angular.z = 0.5
 
         elif data.ypr.z <= -10.0 and data.ypr.z > -20.0:
             print("TURN LEFT")
@@ -68,7 +72,7 @@ class GoForward():
 
         elif data.ypr.z <= -20.0 and data.ypr.z > -45.0:
             print("TURN LEFT")
-            move_cmd.angular.z = -data.ypr.z*0.01
+            move_cmd.angular.z = -0.35 # data.ypr.z*0.01
 
         elif data.ypr.z <= -45.0:
             print("TURN LEFT")

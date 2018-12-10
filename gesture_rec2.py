@@ -56,7 +56,7 @@ while not rospy.is_shutdown():
   mat[:]=[]
   index=0
   time=rospy.get_time()
-  while rospy.get_time()<time+3.5:
+  while rospy.get_time()<time+2.0:
      x.append(data1.x)
      y.append(data1.y)
      z.append(data1.z)
@@ -71,12 +71,7 @@ while not rospy.is_shutdown():
    
   print "The gesture is '"+gest_name[index]+"'"
   pub.publish(gest_name[index])
-     
-
-
-	# Create a publisher which can "talk" to TurtleBot and tell it to move
-        # self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
-        # self.cmd_vel.publish(move_cmd)
+    
         
 def shutdown(self):
     # stop turtlebot

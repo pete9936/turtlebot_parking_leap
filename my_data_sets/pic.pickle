@@ -1,15 +1,15 @@
 S'/home/pete9936/catkin_ws/src/neuro_gesture_leap/my_data_sets'
 p0
 .(lp0
-S'swipe'
+S'Swipe'
 p1
 aS'Gandolf'
 p2
-aS'do nothing'
+aS'Do nothing'
 p3
-aS'hand out'
+aS'Hand out'
 p4
 a.I15
 .I4
-.I102
+.I57
 .

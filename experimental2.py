@@ -17,18 +17,19 @@ class GoForward():
 	stage = 1
 	global index
 	index = 0
-##   	rospy.Subscriber("leapmotion/data", leapros, self.leapCallback)
-##   	rospy.Subscriber("/neuro_gest/gesture", String, self.gestureCallback)
+   	rospy.Subscriber("leapmotion/data", leapros, self.leapCallback)
+   	rospy.Subscriber("/neuro_gest/gesture", String, self.gestureCallback)
+	char=raw_input("Enter 'a' to go into Autonomous mode: ")
         rospy.Subscriber("/tvec1", Vector3, self.camera1Callback)
-        rospy.Subscriber("/tvec2", Vector3, self.camera2Callback)
+        rospy.Subscriber("/tvec2", Vector3, self.camera2Callback) 
 	rospy.spin()
 
-##    def leapCallback(self, leapdata):
-##	global stage
-##	move_cmd = Twist()
-##	if stage == 3:
+    def leapCallback(self, leapdata):
+	global stage
+	move_cmd = Twist()
+	if stage == 3:
 		# Forward/Backward movement
-'''		if data.ypr.y >= 10.0 and data.ypr.y < 20.0:
+		if data.ypr.y >= 10.0 and data.ypr.y < 20.0:
 		    move_cmd.linear.x = -0.1
 
 		elif data.ypr.y >= 20.0 and data.ypr.y < 45.0:
@@ -74,32 +75,31 @@ class GoForward():
 
 		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         	self.cmd_vel.publish(move_cmd)
-'''
-##    def gestureCallback(self, gesturedata):
-##	global stage
-##	move_cmd = Twist()
-##	a = 1
-##	if stage == 2:
-####                if a == 5:
-##		if gesturedata.gesture == 'swipe':   # SKIP GESTURE
-##            		stage = 1
-##        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
-##        		self.cmd_vel.publish(move_cmd)
-##		elif gesturedata.gesture == 'Gandolf':   # Go into manual mode
-##			stage = 3
-##        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
-##        		self.cmd_vel.publish(move_cmd)
-##		else:
-##			stage = 2
-##
-##	if stage == 3:
-## 		char=raw_input("Enter 'a' to go into Autonomous mode: ") # Might want this somewhere else to avoid publishing infinitely
-## 		if char=="a" or char=="A":
-##            		stage = 1
-##        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
-##        		self.cmd_vel.publish(move_cmd)
-##		else:
-##			stage = 3
+
+    def gestureCallback(self, gesturedata):
+	global stage
+	move_cmd = Twist()
+	a = 1
+	if stage == 2:
+                if a == 5:
+		if gesturedata == 'Swipe':   # SKIP GESTURE
+            		stage = 1
+        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
+        		self.cmd_vel.publish(move_cmd)
+		elif gesturedata == 'Gandolf':   # Go into manual mode
+			stage = 3
+        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
+        		self.cmd_vel.publish(move_cmd)
+		else:
+			stage = 2
+
+	if stage == 3:
+ 		if char=="a" or char=="A":
+            		stage = 1
+        		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
+        		self.cmd_vel.publish(move_cmd)
+		else:
+			stage = 3
 
     def camera1Callback(self, tvec1):   # straight camera
 	global stage
