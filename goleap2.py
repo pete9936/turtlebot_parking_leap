@@ -54,29 +54,17 @@ class GoForward():
         else:
             move_cmd.linear.x = 0
 	# Rotational movement
-<<<<<<< HEAD
         if data.palmpos.x >= 40.0 and data.palmpos.x < 100.0: 
-=======
-        if data.palmpos.x > 40.0 and data.palmpos.x < 100.0: 
->>>>>>> cd3d6bd768d9b9b15f4eefbaa92dd667b16a34ac
             print("TURN RIGHT")
             move_cmd.angular.z = 0.2
 
         elif data.palmpos.x >= 100.0 and data.palmpos.x < 180.0:
             print("TURN RIGHT")
-<<<<<<< HEAD
             move_cmd.angular.z = 0.4
 
 	elif data.palmpos.x >= 180.0:
 	    print("TURN RIGHT")
 	    move_cmd.angular.z = 0.7
-=======
-            move_cmd.angular.z = 0.4 # data.ypr.z*0.01
-
-        elif data.palmpos.x >= 180.0:
-            print("TURN RIGHT")
-            move_cmd.angular.z = 0.7
->>>>>>> cd3d6bd768d9b9b15f4eefbaa92dd667b16a34ac
 
         elif data.palmpos.x <= -40.0 and data.palmpos.x > -100.0:
             print("TURN LEFT")
@@ -84,11 +72,7 @@ class GoForward():
 
         elif data.palmpos.x <= -100.0 and data.palmpos.x > -180.0:
             print("TURN LEFT")
-<<<<<<< HEAD
             move_cmd.angular.z = -0.4
-=======
-            move_cmd.angular.z = -0.4 # data.ypr.z*0.01
->>>>>>> cd3d6bd768d9b9b15f4eefbaa92dd667b16a34ac
 
         elif data.palmpos.x <= -180.0:
             print("TURN LEFT")
