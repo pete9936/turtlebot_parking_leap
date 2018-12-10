@@ -36,7 +36,7 @@ class GoForward():
 		    move_cmd.linear.x = -0.3
 
 		elif data.ypr.y >= 45.0:
-		    move_cmd.linear.x = -0.5
+		    move_cmd.linear.x = -0.6
 
 		elif data.ypr.y <= -10.0 and data.ypr.y > -20.0:
 		    move_cmd.linear.x = 0.1
@@ -45,30 +45,29 @@ class GoForward():
 		    move_cmd.linear.x = 0.3
 
 		elif data.ypr.y <= -45.0:
-		    move_cmd.linear.x = 0.5
+		    move_cmd.linear.x = 0.6
 
 		else:
 		    move_cmd.linear.x = 0
 
 		# Rotational movement
-		if data.ypr.z >= 10.0 and data.ypr.z < 20.0: 
-
-		    move_cmd.angular.z = 0.2
-
-		elif data.ypr.z >= 20.0 and data.ypr.z < 45.0:
-		    move_cmd.angular.z = 0.35
-
-		elif data.ypr.z >= 45.0:
-		    move_cmd.angular.z = 0.5
-
-		elif data.ypr.z <= -10.0 and data.ypr.z > -20.0:
+		if data.palmpos.x >= 40.0 and data.palmpos.x < 100.0: 
 		    move_cmd.angular.z = -0.2
 
-		elif data.ypr.z <= -20.0 and data.ypr.z > -45.0:
-		    move_cmd.angular.z = -0.35
+		elif data.palmpos.x >= 100.0 and data.palmpos.x < 180.0:
+		    move_cmd.angular.z = -0.4
 
-		elif data.ypr.z <= -45.0:
-		    move_cmd.angular.z = -0.5
+		elif data.palmpos.x >= 180.0:
+		    move_cmd.angular.z = -0.8
+
+		elif data.palmpos.x <= -40.0 and data.palmpos.x > -100.0:
+		    move_cmd.angular.z = 0.2
+
+		elif data.palmpos.x <= -100.0 and data.palmpos.x > -180.0:
+		    move_cmd.angular.z = 0.4
+
+		elif data.palmpos.x <= -180.0:
+		    move_cmd.angular.z = 0.8
 		    
 		else:
 		    move_cmd.angular.z = 0.0
