@@ -15,10 +15,10 @@ To test the leap_motion first make sure the LeapMotion is running (sudo leapd) o
 
 # Setting up the Turtlebot Laptop
 
-The vision packages for Astra used on this project can be found below:
+To set up the Astra follow the directions to get the astra_camera and astra_launch packages found below:
+http://wiki.ros.org/Sensors/OrbbecAstra 
+
 Using OpenCV 3.3.1
-
-
 
 
 
