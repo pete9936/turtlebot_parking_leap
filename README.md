@@ -23,5 +23,3 @@ Using OpenCV 3.3.1
 
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot
-
-You suck!
