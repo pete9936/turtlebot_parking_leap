@@ -86,7 +86,7 @@ class GoForward():
             		stage = 1
         		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         		self.cmd_vel.publish(move_cmd)
-		elif gesturedata == 'Gandolf':   # Go into manual mode
+		elif gesturedata == 'Gandalf':   # Go into manual mode
 			stage = 3
         		self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
         		self.cmd_vel.publish(move_cmd)
