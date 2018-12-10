@@ -54,29 +54,29 @@ class GoForward():
         else:
             move_cmd.linear.x = 0
 	# Rotational movement
-        if data.ypr.z >= 10.0 and data.ypr.z < 20.0: 
+        if data.palmpos.x > 40.0 and data.palmpos.x < 100.0: 
             print("TURN RIGHT")
             move_cmd.angular.z = 0.2
 
-        elif data.ypr.z >= 20.0 and data.ypr.z < 45.0:
+        elif data.palmpos.x >= 100.0 and data.palmpos.x < 180.0:
             print("TURN RIGHT")
-            move_cmd.angular.z = 0.35 # data.ypr.z*0.01
+            move_cmd.angular.z = 0.4 # data.ypr.z*0.01
 
-        elif data.ypr.z >= 45.0:
+        elif data.palmpos.x >= 180.0:
             print("TURN RIGHT")
-            move_cmd.angular.z = 0.5
+            move_cmd.angular.z = 0.7
 
-        elif data.ypr.z <= -10.0 and data.ypr.z > -20.0:
+        elif data.palmpos.x <= -40.0 and data.palmpos.x > -100.0:
             print("TURN LEFT")
             move_cmd.angular.z = -0.2
 
-        elif data.ypr.z <= -20.0 and data.ypr.z > -45.0:
+        elif data.palmpos.x <= -100.0 and data.palmpos.x > -180.0:
             print("TURN LEFT")
-            move_cmd.angular.z = -0.35 # data.ypr.z*0.01
+            move_cmd.angular.z = -0.4 # data.ypr.z*0.01
 
-        elif data.ypr.z <= -45.0:
+        elif data.palmpos.x <= -180.0:
             print("TURN LEFT")
-            move_cmd.angular.z = -0.5
+            move_cmd.angular.z = -0.7
             
         else:
             move_cmd.angular.z = 0.0
