@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
 <launch>
-
+    
+    <!-- run leap sender.py -->
     <node name="leap_sender" pkg="leap_motion" type="sender.py" output="screen">
     </node>
 
     <!-- run neuro gesture leap -->
     <include file="$(find neuro_gesture_leap)/launch/gesture_leap2.launch"/>
+    
+    <!-- run the main script experiment2.py -->
+    <include file="$(find robot)/launch/experiment2.launch"/>
 
 
 </launch>
