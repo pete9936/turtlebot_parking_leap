@@ -33,13 +33,24 @@ To test the leap_motion first make sure the LeapMotion is running (sudo leapd) o
 To connect to the Turtlebot and run everything properly you will have to set up a few parameters in your .bashrc. Add the following lines with the proper ip addresses for both your remote work station and the turtlebot laptop:
 ```
 export ROS_MASTER_URI=http://localhost:11311
-export ROS_MASTER_URI=http://IP.ADDRESS.TURTLE.BOT  # turtlebot IP address
-export ROS_HOSTNAME=IP.ADDRESS.LOCAL.MACHINE  # your laptop IP address
+export ROS_MASTER_URI=http://<turtlebot ip address>  # turtlebot IP address
+export ROS_HOSTNAME=<remote machine ip address>  # your laptop IP address
 ```
 
 ## Setting up the Turtlebot laptop
 
-In the .bashrc
+For details on the installation of the ROS software for the turtlebot netbook go to the wiki page: http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation
+
+Since the wiki page is meant for ROS indigo, (not kinetic which we are using) we have modified the input and conveniently appended it below, also we found that the 'rocon' packages to not install so we just removed them:
+```
+sudo apt-get install ros-kinetic-turtlebot ros-kinetic-turtlebot-apps ros-kinetic-turtlebot-interactions ros-kinetic-turtlebot-simulator ros-kinetic-kobuki-ftdi ros-indigo-ar-track-alvar-msgs
+```
+
+In the .bashrc of the turtlebot add the following lines:
+```
+export ROS_MASTER_URI=http://<turtlebot ip address>:11311
+export ROS_IP=<turtlebot ip address>
+```
 
 ## Get necessary imaging toolboxes
 
@@ -50,4 +61,27 @@ This project was verified using OpenCV 3.3.1, though other versions will most li
 
 In order to identify a parking space we used the Astra camera to detect a CV code (similar to AR code) which when detected by the camera would initiate an autonomous parking maneuver.
 
-For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot. Everything can be launched from "..."
+For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
+
+## Running Everything
+Now that you hopefully have everything installed and setup the launch procedure is as follows.
+
+On the turtlebot laptop start roscore.
+
+On your remote work station connect to the turtlebot via ssh and type turtlebot password when prompted:
+```
+ssh <username>@<turtlebot ip address>
+```
+Now that remote station is connected, to actually send commands to the turtlebot you must first type the following command:
+```
+roslaunch turtlebot_bringup minimal.launch
+```
+For a quick verification that this in fact is working (in a new terminal) try controlling turtlebot with teleop first:
+```
+roslaunch turtlebot_teleop keyboard_teleop.launch
+```
+
+After verifying everything is running properly run leap_turtle.launch file (this runs sender.py, gesture_rec2.py, and experiment2.py):
+```
+rosrun leap_motion leap_turtle.launch
+```
