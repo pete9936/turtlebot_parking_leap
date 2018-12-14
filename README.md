@@ -115,6 +115,7 @@ Generate 2 AR markers: one for the side camera and one for the front camera.
 
 Then, calibrate both Astra cameras and generate 2 intrinsic parameter files by following this link:
 http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration
+
 Name the 2 intrinsic parameter files differently.
 
 Then, run detect_markers1 and detect_markers2 through ROS. Replace the -c argument with the path to your camera intrinsic parameters file.
