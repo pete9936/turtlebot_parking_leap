@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node name="experiment2" pkg="robot" type="experiment2.py" output="screen">
+    <node name="experimental2" pkg="robot" type="experimental2.py" output="screen">
     </node>
 
 </launch>
