@@ -104,10 +104,18 @@ git clone https://github.com/tonybaltovski/ros_astra_camera.git --branch upstrea
 cd ..
 catkin_make
 ```
+This project was verified using OpenCV 3.3.1, which comes with ROS Kinetic, and OpenCV 3.4.3. 
 
-This project was verified using OpenCV 3.3.1, though other versions will most likely work fine.
-
-In order to identify a parking space we used the Astra camera to detect a CV code (similar to AR code) which when detected by the camera would initiate an autonomous parking maneuver.
+In order to identify a parking space we used the Astra camera to detect an AR marker which when detected by the camera would initiate an autonomous parking maneuver. To generate the AR marker, follow the tutorial on https://docs.opencv.org/3.1.0/d5/dae/tutorial_aruco_detection.html and compile and run create_marker:
+```
+g++ -o create_marker create_marker.cpp `pkg-config opencv --cflags --libs`
+./create_marker "d5_id10.jpg" -d=5 -id=10 -si=true -ms=800
+```
+Generate 2 AR markers: one for the side camera and one for the front camera. Then, run detect_markers1 and detect_markers2 through ROS:
+```
+rosrun robot detect_markers1 -c="/home/blingshock/openCVtutorials/intrinsic.yml" -d=5 -ci=1 -l=.196
+rosrun robot detect_markers2 -c="/home/blingshock/openCVtutorials/intrinsic.yml" -d=5 -ci=2 -l=.196
+```
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
 
