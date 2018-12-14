@@ -1,6 +1,7 @@
 ROOT=$PWD
 
-cd $ROOT/turtlebot_parking_leap
+cd $ROOT
+cd turtlebot_parking_leap
 
 chmod goleap.py
 chmod +x goleap2.py
