@@ -63,6 +63,15 @@ In order to identify a parking space we used the Astra camera to detect a CV cod
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
 
+To set up the Astra camera clone the following ros_astra_launch repository (branch: upstream) from Clearpath Robotics in your catkin workspace source folder:
+```
+cd ~/catkin_ws/src
+git clone https://github.com/tonybaltovski/ros_astra_launch.git --branch upstream
+git clone https://github.com/tonybaltovski/ros_astra_camera.git --branch upstream
+cd ..
+catkin_make
+```
+
 ## Running Everything
 Now that you hopefully have everything installed and setup the launch procedure is as follows.
 
