@@ -106,15 +106,21 @@ catkin_make
 ```
 This project was verified using OpenCV 3.3.1, which comes with ROS Kinetic, and OpenCV 3.4.3. 
 
-In order to identify a parking space we used the Astra camera to detect an AR marker which when detected by the camera would initiate an autonomous parking maneuver. To generate the AR marker, follow the tutorial on https://docs.opencv.org/3.1.0/d5/dae/tutorial_aruco_detection.html and compile and run create_marker:
+In order to identify a parking space we used the Astra camera to detect an AR marker which when detected by the camera would initiate an autonomous parking maneuver. To generate the AR marker, follow the tutorial on https://docs.opencv.org/3.3.1/d5/dae/tutorial_aruco_detection.html and compile and run create_marker:
 ```
 g++ -o create_marker create_marker.cpp `pkg-config opencv --cflags --libs`
 ./create_marker "d5_id10.jpg" -d=5 -id=10 -si=true -ms=800
 ```
-Generate 2 AR markers: one for the side camera and one for the front camera. Then, run detect_markers1 and detect_markers2 through ROS:
+Generate 2 AR markers: one for the side camera and one for the front camera. 
+
+Then, calibrate both Astra cameras and generate 2 intrinsic parameter files by following this link:
+http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration
+Name the 2 intrinsic parameter files differently.
+
+Then, run detect_markers1 and detect_markers2 through ROS. Replace the -c argument with the path to your camera intrinsic parameters file.
 ```
-rosrun robot detect_markers1 -c="/home/blingshock/openCVtutorials/intrinsic.yml" -d=5 -ci=1 -l=.196
-rosrun robot detect_markers2 -c="/home/blingshock/openCVtutorials/intrinsic.yml" -d=5 -ci=2 -l=.196
+rosrun robot detect_markers1 -c="/home/blingshock/openCVtutorials/intrinsic1.yml" -d=5 -ci=1 -l=.196
+rosrun robot detect_markers2 -c="/home/blingshock/openCVtutorials/intrinsic2.yml" -d=5 -ci=2 -l=.196
 ```
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
