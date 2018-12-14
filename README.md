@@ -96,14 +96,22 @@ export ROS_IP=<turtlebot ip address>
 
 ## Get necessary imaging toolboxes
 
-To set up the Astra follow the directions to get the astra_camera and astra_launch packages found below:
-http://wiki.ros.org/Sensors/OrbbecAstra 
+To set up the Astra camera clone the following ros_astra_launch repository (branch: upstream) from Clearpath Robotics in your catkin workspace source folder:
+```
+cd ~/catkin_ws/src
+git clone https://github.com/tonybaltovski/ros_astra_launch.git --branch upstream
+git clone https://github.com/tonybaltovski/ros_astra_camera.git --branch upstream
+cd ..
+catkin_make
+```
 
 This project was verified using OpenCV 3.3.1, though other versions will most likely work fine.
 
 In order to identify a parking space we used the Astra camera to detect a CV code (similar to AR code) which when detected by the camera would initiate an autonomous parking maneuver.
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
+
+
 
 ## Running Everything
 Now that you hopefully have everything installed and setup the launch procedure is as follows.
