@@ -5,6 +5,13 @@ Repository for a turtlebot to autonomously park while also having human gesture 
 
 Hardware required: Turtlebot with its own laptop, two depth cameras (we used Astra) Kinect would also work, and a LeapMotion for gesture detection.
 
+## Initial Install of repository and datasets
+Somewhere on your machine clone this repository and in the same directory run ```build.sh``` to make the proper files executables:
+```
+git clone https://github.com/pete9936/turtlebot_parking_leap.git
+./build.sh
+```
+
 ## Install LeapMotion Packages
 First create a ROS workspace for the project, for this I am calling it 'catkin_ws':
 ```
@@ -146,7 +153,7 @@ For a quick verification that this in fact is working (in a new terminal) try co
 roslaunch turtlebot_teleop keyboard_teleop.launch
 ```
 
-After verifying everything is running properly run leap_turtle.launch file (this runs sender.py, gesture_rec2.py, and experiment2.py):
+After verifying everything is running properly run leap_turtle.launch file (this runs sender.py, gesture_rec2.py, and experimental2.py):
 ```
 rosrun leap_motion leap_turtle.launch
 ```
