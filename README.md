@@ -7,23 +7,18 @@ Hardware required: Turtlebot with its own laptop, two depth cameras (we used Ast
 
 Details on our method and overall project can be found in our Project Report ```CSCI_5551_Final_Report.pdf``` given above, and a demonstration is given in the video at this link: https://drive.google.com/file/d/1lZUKtvfeqe9mcH4OGtyH4-FplmpjByGg/view?usp=sharing
 
-## Initial Install of repository and datasets
-Somewhere on your machine clone this repository then navigate to the directory and run ```build.sh``` to make the proper files executables:
-```
-git clone https://github.com/pete9936/turtlebot_parking_leap.git
-cd turtlebot_parking_leap.git
-./build.sh
-```
-If for some reason ```build.sh``` will not run then just manually change those files to executables.
-
-## Install LeapMotion Packages
+## Installation
 First create a ROS workspace for the project, for this I am calling it 'catkin_ws':
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 catkin_init_workspace
 ```
+Now clone this repository into your ```catkin_ws/src``` with the following:
+```git clone https://github.com/pete9936/turtlebot_parking_leap.git```
 
+
+### Install LeapMotion Packages
 For the leap motion first clone the LeapMotion package we modified for ROS (this has the LeapSDK included) into your newly created catkin_ws: 
 ```
 cd ~/catkin_ws/src
