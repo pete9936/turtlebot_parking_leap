@@ -5,6 +5,8 @@ Repository for a turtlebot to autonomously park while also having human gesture 
 
 Hardware required: Turtlebot with its own laptop, two depth cameras (we used Astra) Kinect would also work, and a LeapMotion for gesture detection.
 
+Details on our method and overall project can be found in our Project Report ```CSCI_5551_Final_Report.pdf``` given above, and a demonstration is given in the video at this link: ```https://drive.google.com/file/d/1lZUKtvfeqe9mcH4OGtyH4-FplmpjByGg/view?usp=sharing```
+
 ## Initial Install of repository and datasets
 Somewhere on your machine clone this repository then navigate to the directory and run ```build.sh``` to make the proper files executables:
 ```
