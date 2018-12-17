@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <node name="gesture_rec2" pkg="neuro_gesture_leap" type="gesture_rec2.py" output="screen">
-    </node>
-
-</launch>
