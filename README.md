@@ -12,6 +12,7 @@ git clone https://github.com/pete9936/turtlebot_parking_leap.git
 cd turtlebot_parking_leap.git
 ./build.sh
 ```
+If for some reason ```build.sh``` will not run then just manually change those files to executables.
 
 ## Install LeapMotion Packages
 First create a ROS workspace for the project, for this I am calling it 'catkin_ws':
