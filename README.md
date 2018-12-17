@@ -15,6 +15,7 @@ cd ~/catkin_ws/src
 catkin_init_workspace
 ```
 Now clone this repository into your ```catkin_ws/src``` with the following:
+
 ```git clone https://github.com/pete9936/turtlebot_parking_leap.git```
 
 
@@ -51,9 +52,12 @@ For reference we show the updates made to our .bashrc below as this may be a lit
 export PYTHONPATH=~/Desktop/pybrain:$PYTHONPATH
 export PYTHONPATH=$PYTHONPATH:$~/catkin_ws/src/leap_motion/LeapSDK/lib:$~/catkin_ws/src/leap_motion/LeapSDK/lib/x64
 ```
-In the "Making and Training Datasets" section they recommend 10-15 sets for each gesture. We found that using 15 works well, but if you desire more sensitive gesture detection use more training sets. We used 30 for each gesture, which maked gesture detection a lot more sensitive. This was desirable in our case. All of the trained data and data sets for our gestures are located in the "my_data_sets" folder.
+All of our modifications including our dataset can be found in the ```neuro_gest_files``` folder. Simply move these into the neuro_gesture_leap repository to use.
 
-We changed the record time of the gestures to 2.0 seconds (currently 3.5 in package). This allows for a more fluid real-time gesture command for the Turtlebot. To train gestures accordingly replace the ```get_gesture.py``` file from the TanvirParhar repository with our ```get_gesture.py``` file. You will also need to replace ```gesture_rec.py``` with our ```gesture_rec.py``` file.
+We found that using 15 training sets works well, but if you desire more sensitive gesture detection use more training sets. We used 30 for each gesture, which maked gesture detection a lot more sensitive. This was desirable in our case. All of the trained data and data sets for our gestures are located in the "my_data_sets" folder.
+
+We changed the record time of the gestures to 2.0 seconds (currently 3.5 in package). This allows for a more fluid real-time gesture command for the Turtlebot. To train gestures accordingly replace the ```get_gesture.py``` file from the TanvirParhar repository with our ```get_gesture_2sec.py``` file. You will also need to replace ```gesture_rec.py``` with our ```gesture_rec_2sec.py``` file.
+
 In order to record gestures on a continual 2.0 second feed without manual input use the ```gesture_rec2.py``` file when running the Leap Motion.
 
 Now we can test this out. First start roscore then in separate terminals run the sender.py file and the gesture_rec.py (if you just want to record one gesture at a time) or gesture_rec2.py (if you want to record gestures continually).
