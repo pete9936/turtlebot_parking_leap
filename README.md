@@ -138,24 +138,64 @@ For the full navigation scheme use experimental2.py to run the overall architect
 
 
 ## Running Everything
-Now that you hopefully have everything installed and setup the launch procedure is as follows.
+This project requires 3 USB ports for the Turtlebot laptop. Connect the Turtlebot to 1 USB port and the 2 Astra cameras to 2 other USB ports.
 
-On the turtlebot laptop start roscore.
+For Turtlebot:
 
-On your remote work station connect to the turtlebot via ssh and type turtlebot password when prompted:
+On the Turtlebot laptop start roscore in terminal. 
+```
+roscore
+```
+In a new terminal tab, execute the following lines:
+```
+echo export ROS_MASTER_URI=http://localhost:11311 >> ~/.bashrc
+echo export ROS_HOSTNAME=IP_OF_TURTLEBOT >> ~/.bashrc
+```
+In the current tab execute this line:
+```
+rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_1>.yml" -d=5 -ci=1 -l=.196
+```
+Open a new terminal tab and execute this line:
+```
+rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_2>.yml" -d=5 -ci=2 -l=.196
+
+```
+
+For workstation:
+
+On the remote workstation connect to the turtlebot via ssh and type turtlebot password when prompted:
 ```
 ssh <username>@<turtlebot ip address>
 ```
-Now that remote station is connected, to actually send commands to the turtlebot you must first type the following command:
+You must also connect your workstation to the same ROS network as the turtlebot laptop. Make sure your workstation is connected to the same WiFi network as the Turtlebot laptop. On your remote workstation terminal, execute the following lines:
+```
+echo export ROS_MASTER_URI=http://IP_OF_TURTLEBOT:11311 >> ~/.bashrc
+echo export ROS_HOSTNAME=IP_OF_WORKSTATION >> ~/.bashrc
+```
+Now that remote station is connected, to actually send commands to the turtlebot you must first type the following command in the SSH'd terminal tab:
 ```
 roslaunch turtlebot_bringup minimal.launch
 ```
-For a quick verification that this in fact is working (in a new terminal) try controlling turtlebot with teleop first:
+For a quick verification that this in fact is working (in a new terminal) try controlling turtlebot with teleop first. You must open a new tab again and SSH into the Turtlebot.
 ```
+ssh <username>@<turtlebot ip address>
 roslaunch turtlebot_teleop keyboard_teleop.launch
 ```
-
-After verifying everything is running properly run leap_turtle.launch file (this runs sender.py, gesture_rec2.py, and experimental2.py):
+Once this is verified to be working, hit Ctrl+C to close the teleop. Make sure you do this or the robot will not run the parallel parking functions.
+To run the entire working robot algorithms open each of the following commmands in a NEW terminal tab:
 ```
+sudo leapd
+LeapControlPanel
 rosrun leap_motion leap_turtle.launch
 ```
+Open another new terminal tab SSH into the turtlebot again in this tab:
+```
+ssh <username>@<turtlebot_ip_address>
+```
+Navigate to the turtleleapbot_main.py directory and execute turtleleapbot_main.py:
+```
+cd ~/catkin_ws/src/turtlebot_parking_leap/src/
+python turtleleapbot_main.py
+```
+
+Now the Turtlebot should run our Self-parallel Parking with Gesture Control algorithm!
