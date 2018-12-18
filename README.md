@@ -14,20 +14,19 @@ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 catkin_init_workspace
 ```
-Now clone this repository into your ```catkin_ws/src``` with the following:
+Now that we have our workspace created we can add this repository and the LEAP motion repository we modified. This has the LeapSDK included. clone this repository into your ```catkin_ws/src``` with the following:
 
-```git clone https://github.com/pete9936/turtlebot_parking_leap.git```
-
-
-### Install LeapMotion Packages
-For the leap motion first clone the LeapMotion package we modified for ROS (this has the LeapSDK included) into your newly created catkin_ws: 
 ```
 cd ~/catkin_ws/src
+git clone https://github.com/pete9936/turtlebot_parking_leap.git
 git clone https://github.com/pete9936/leap_motion
 cd ..
 catkin_make
 ```
-To test the leap_motion first make sure the LeapMotion is running:
+Now we should have the ```turtlebot_parking_leap``` and ```leap_motion``` repositories installed. Now let's first try out the leap_motion.
+
+### Running the LEAP motion
+To test the LEAP motion first make sure the LeapMotion is running:
 ```
 sudo leapd
 ```
