@@ -23,6 +23,8 @@ git clone https://github.com/pete9936/leap_motion
 cd ..
 catkin_make
 ```
+If catkin_make gives you errors, download the required depencies.
+
 Now we should have the ```turtlebot_parking_leap``` and ```leap_motion``` repositories installed. Now let's first try out the leap_motion.
 
 ### Running the LEAP motion
@@ -43,9 +45,8 @@ LeapControlPanel
 Then bring up the visualizer, found in drop down menu of Leap Control Panel.
 
 ### Install gesture package for Leap Motion
-For using gesture control we used the neuro_gesture_leap package in order to create unique gestures that could easily be recognized and used for high level control. All of the details including where to clone the repository and how to use the code to create your own gestures can be found at the link below:
+For using gesture control we used the neuro_gesture_leap package in order to create unique gestures that could easily be recognized and used for high level control. All of the details including where to download the repository and how to use the code to create your own gestures can be found at the link below:
 http://wiki.ros.org/TanvirParhar/neuro_gesture_leap 
-Note that the repository ```neuro_gesture_leap``` needs to be in the ```catkin_ws/src``` for this project, where the other two repositories are located.
 
 For reference we show the updates made to our .bashrc below as this may be a little ambiguous in their documentation (note that I have pybrain cloned to my Desktop, not the home directory as they do):
 ```
@@ -68,10 +69,9 @@ Then in a new terminal run:
 ```
 rosrun leap_motion gesture_rec2.py
 ```
-Make sure that both files are executables (shows up green in terminal), if they are not then make them executables, for example navigate to the folder and run chmod command:
+Make sure that both files are executables (shows up green in terminal), if they are not then make them executables. To make a python file an executable, navigate to the directory that the file is located in and use the command:
 ```
-cd ~/catkin_ws/src/neuro_gesure_leap/scripts
-chmod +x gesture_rec2.py
+chmod +x <file_name>.py
 ```
 
 ### What our gestures do
@@ -106,14 +106,6 @@ export ROS_IP=<turtlebot ip address>
 
 ## Get necessary imaging toolboxes
 
-To set up the Astra camera clone the following ros_astra_launch repository (branch: upstream) from Clearpath Robotics in your catkin workspace source folder:
-```
-cd ~/catkin_ws/src
-git clone https://github.com/tonybaltovski/ros_astra_launch.git --branch upstream
-git clone https://github.com/tonybaltovski/ros_astra_camera.git --branch upstream
-cd ..
-catkin_make
-```
 This project was verified using OpenCV 3.3.1, which comes with ROS Kinetic, and OpenCV 3.4.3. 
 
 In order to identify a parking space we used the Astra camera to detect an AR marker which when detected by the camera would initiate an autonomous parking maneuver. To generate the AR marker, follow the tutorial on https://docs.opencv.org/3.3.1/d5/dae/tutorial_aruco_detection.html and compile and run create_marker:
@@ -130,8 +122,8 @@ Name the 2 intrinsic parameter files differently.
 
 Then, run detect_markers1 and detect_markers2 through ROS. Replace the -c argument with the path to your camera intrinsic parameters file.
 ```
-rosrun robot detect_markers1 -c="/home/blingshock/openCVtutorials/intrinsic1.yml" -d=5 -ci=1 -l=.196
-rosrun robot detect_markers2 -c="/home/blingshock/openCVtutorials/intrinsic2.yml" -d=5 -ci=2 -l=.196
+rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_1>.yml" -d=5 -ci=1 -l=.196
+rosrun robot detect_markers2 -c="<path_to_camera_intrinsic_file_2>.yml" -d=5 -ci=2 -l=.196
 ```
 
 For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
@@ -139,24 +131,64 @@ For the full navigation scheme use experimental2.py to run the overall architect
 
 
 ## Running Everything
-Now that you hopefully have everything installed and setup the launch procedure is as follows.
+This project requires 3 USB ports for the Turtlebot laptop. Connect the Turtlebot to 1 USB port and the 2 Astra cameras to 2 other USB ports.
 
-On the turtlebot laptop start roscore.
+For Turtlebot:
 
-On your remote work station connect to the turtlebot via ssh and type turtlebot password when prompted:
+On the Turtlebot laptop start roscore in terminal. 
+```
+roscore
+```
+In a new terminal tab, execute the following lines:
+```
+echo export ROS_MASTER_URI=http://localhost:11311 >> ~/.bashrc
+echo export ROS_HOSTNAME=IP_OF_TURTLEBOT >> ~/.bashrc
+```
+In the current tab execute this line:
+```
+rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_1>.yml" -d=5 -ci=1 -l=.196
+```
+Open a new terminal tab and execute this line:
+```
+rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_2>.yml" -d=5 -ci=2 -l=.196
+
+```
+
+For workstation:
+
+On the remote workstation connect to the turtlebot via ssh and type turtlebot password when prompted:
 ```
 ssh <username>@<turtlebot ip address>
 ```
-Now that remote station is connected, to actually send commands to the turtlebot you must first type the following command:
+You must also connect your workstation to the same ROS network as the turtlebot laptop. Make sure your workstation is connected to the same WiFi network as the Turtlebot laptop. On your remote workstation terminal, execute the following lines:
+```
+echo export ROS_MASTER_URI=http://IP_OF_TURTLEBOT:11311 >> ~/.bashrc
+echo export ROS_HOSTNAME=IP_OF_WORKSTATION >> ~/.bashrc
+```
+Now that remote station is connected, to actually send commands to the turtlebot you must first type the following command in the SSH'd terminal tab:
 ```
 roslaunch turtlebot_bringup minimal.launch
 ```
-For a quick verification that this in fact is working (in a new terminal) try controlling turtlebot with teleop first:
+For a quick verification that this in fact is working (in a new terminal) try controlling turtlebot with teleop first. You must open a new tab again and SSH into the Turtlebot.
 ```
+ssh <username>@<turtlebot ip address>
 roslaunch turtlebot_teleop keyboard_teleop.launch
 ```
-
-After verifying everything is running properly run leap_turtle.launch file (this runs sender.py, gesture_rec2.py, and experimental2.py):
+Once this is verified to be working, hit Ctrl+C to close the teleop. Make sure you do this or the robot will not run the parallel parking functions.
+To run the entire working robot algorithms open each of the following commmands in a NEW terminal tab:
 ```
+sudo leapd
+LeapControlPanel
 rosrun leap_motion leap_turtle.launch
 ```
+Open another new terminal tab SSH into the turtlebot again in this tab:
+```
+ssh <username>@<turtlebot_ip_address>
+```
+Navigate to the turtleleapbot_main.py directory and execute turtleleapbot_main.py:
+```
+cd ~/catkin_ws/src/turtlebot_parking_leap/src/
+python turtleleapbot_main.py
+```
+
+Now the Turtlebot should run our Self-parallel Parking with Gesture Control algorithm!
