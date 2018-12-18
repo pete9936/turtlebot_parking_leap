@@ -126,8 +126,6 @@ rosrun robot detect_markers1 -c="<path_to_camera_intrinsic_file_1>.yml" -d=5 -ci
 rosrun robot detect_markers2 -c="<path_to_camera_intrinsic_file_2>.yml" -d=5 -ci=2 -l=.196
 ```
 
-For the full navigation scheme use experimental2.py to run the overall architecture for the Turtlebot.
-
 
 
 ## Running Everything
